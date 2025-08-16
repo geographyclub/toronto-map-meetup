@@ -4,9 +4,15 @@
 	"metadata": {
 		"maputnik:renderer": "mbgljs"
 	},
-	"glyphs": "assets/fonts/{fontstack}/{range}.pbf",
-	"sprite": "https://maptoons.github.io/assets/sprites/sprites",
+	"glyphs": "https://geographyclub.github.io/toronto-map-meetup/assets/fonts/{fontstack}/{range}.pbf",
+	"sprite": "https://geographyclub.github.io/toronto-map-meetup/assets/sprites/sprites",
 	"sources": {
+		"bing": {
+			"type": "raster",
+			"tiles": ["https://geographyclub.github.io/toronto-map-meetup/data/bing/{z}/{x}/{y}.png"],
+			"tileSize": 256,
+			"attribution": "&copy; Bing"
+  },
 		"osm": {
 			"type": "vector",
 			"url": "https://vector.openstreetmap.org/shortbread_v1/tilejson.json"
@@ -21,100 +27,16 @@
 			}
 		},
 		{
-			"source": "osm",
-			"id": "ocean",
-			"type": "fill",
-			"source-layer": "ocean",
+			"id": "bing",
+			"type": "raster",
+			"source": "bing",
 			"paint": {
-				"fill-color": "hsl(181, 45%, 80%)"
+				"raster-hue-rotate": 0,
+				"raster-contrast": 0,
+				"raster-saturation": 0.7,
+				"raster-brightness-min": 0,
+				"raster-brightness-max": 1
 			}
-		},
-		{
-			"source": "osm",
-			"id": "land-beach",
-			"type": "fill",
-			"source-layer": "land",
-			"filter": [ "all", [ "in", "kind", "beach", "sand" ] ],
-			"paint": {
-				"fill-color": "hsl(39, 100%, 85%)"
-			}
-		},
-		{
-			"source": "osm",
-			"id": "street",
-			"type": "line",
-			"source-layer": "streets",
-			"filter": [ "in", "kind", "motorway", "trunk", "primary", "secondary", "tertiary", "residential" ],
-			"paint": {
-				"line-color": "hsl(54, 56%, 90%)",
-				"line-width": [ "interpolate", [ "exponential", 2 ], [ "zoom" ], 11, 0, 20, 200 ]
-			},
-			"layout": {
-				"line-join": "round",
-				"line-cap": "round"
-			},
-			"minzoom": 11
-		},
-		{
-			"source": "osm",
-			"id": "label-street",
-			"type": "symbol",
-			"source-layer": "street_labels",
-			"filter": [ "in", "kind", "motorway", "trunk", "primary", "secondary", "tertiary", "residential" ],
-			"layout": {
-				"text-field": "{name}",
-				"text-transform": "uppercase",
-				"text-font": [ "poppins-regular" ],
-				"text-letter-spacing": 0.2,
-				"symbol-placement": "line",
-				"symbol-spacing": 400,
-				"text-anchor": "center",
-				"text-size": [ "interpolate", [ "exponential", 1.5 ], [ "zoom" ], 10, 5, 20, 30 ]
-			},
-			"paint": {
-				"text-color": "hsl(0, 0%, 30%)",
-				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 11, 0, 12, 1 ]
-			}
-		},
-		{
-			"source": "osm",
-			"id": "label-neighbourhood",
-			"type": "symbol",
-			"source-layer": "place_labels",
-			"filter": [ "in", "kind", "neighbourhood", "quarter", "suburb" ],
-			"layout": {
-				"text-field": "{name}",
-				"text-font": [ "poppins-medium" ],
-				"text-letter-spacing": 0.1,
-				"text-size": 10
-			},
-			"paint": {
-				"text-color": "hsl(0, 0%, 30%)",
-				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 11, 1, 12, 0 ],
-				"text-halo-color": "hsla(0, 0%, 100%, 0.5)",
-				"text-halo-width": 0
-			},
-			"maxzoom": 12
-		},
-		{
-			"source": "osm",
-			"id": "label-city",
-			"type": "symbol",
-			"source-layer": "place_labels",
-			"filter": [ "in", "kind", "city", "town", "village", "hamlet", "capital", "state_capital" ],
-			"layout": {
-				"text-field": "{name}",
-				"text-font": [ "poppins-medium" ],
-				"text-letter-spacing": 0.1,
-				"text-size": 10
-			},
-			"paint": {
-				"text-color": "hsl(0, 0%, 30%)",
-				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 11, 1, 12, 0 ],
-				"text-halo-color": "hsla(0, 0%, 100%, 0.5)",
-				"text-halo-width": 0
-			},
-			"maxzoom": 12
 		}
 	]
 }

@@ -64,13 +64,15 @@
             style: styleFile,
             center: [-79.38709, 43.64909],
             //maxBounds: [ [-79.56, 43.56],[-79.27, 43.72] ],
-            zoom: 16.3,
-            minZoom: 8,
-            maxZoom: 18,
-            bearing: -39,
-            pitch: 30,
+            zoom: 16,
+            minZoom: 16,
+            maxZoom: 16,
+            bearing: -16,
+            pitch: 0,
             hash: true,
-            pixelRatio: 1
+            pixelRatio: 1,
+            pitchWithRotate: false,
+            dragRotate: false
         });
 
         map.on('load', async () => {
