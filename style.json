@@ -5,7 +5,7 @@
 		"maputnik:renderer": "mbgljs"
 	},
 	"glyphs": "https://mapcity.io/toronto-bia/assets/fonts/{fontstack}/{range}.pbf",
-	"sprite": "https://mapcity.io/toronto-bia/assets/sprites/sprites-maki",
+	"sprite": "https://mapcity.io/toronto-bia/assets/sprites",
 	"sources": {
 		"osm": {
 			"type": "vector",
