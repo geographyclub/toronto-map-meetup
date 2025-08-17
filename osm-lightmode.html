@@ -49,11 +49,41 @@
             },
             center: [-79.40075930542173, 43.659347982728406],
             zoom: 16,
+            minZoom: 12,
             maxZoom: 18,
             bearing: -16,
             pitch: 20,
             pixelRatio: 1,
             hash: true
+        });
+
+        map.on('load', async () => {
+            // Add building source
+            map.addSource('toronto_buildings', {
+                type: 'vector',
+                tiles: ['https://torontotechweek.github.io/data/toronto_buildings/{z}/{x}/{y}.pbf']
+            });
+
+            // Add buildings
+            map.addLayer({
+                'id': 'buildings',
+                'source': 'toronto_buildings',
+                'source-layer': 'toronto_buildings',
+                'type': 'fill-extrusion',
+                'paint': {
+                    'fill-extrusion-color': 'hsl(0, 0%, 100%)',
+                    'fill-extrusion-height': [
+                        'case',
+                        ['!=', ['get', 'max_height'], null], ['get', 'max_height'],
+                        ['!=', ['get', 'avg_height'], null], ['get', 'avg_height'],
+                        10
+                    ],
+                    'fill-extrusion-base': 0,
+                    'fill-extrusion-opacity': ['interpolate', ['linear'], ['zoom'], 15, 0, 16, 0.7, 17, 0.7, 18, 0]
+                },
+                'minzoom': 15
+            });
+
         });
 
     </script>

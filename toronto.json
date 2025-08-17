@@ -1,0 +1,73 @@
+{
+	"version": 8,
+	"name": "osm",
+	"metadata": {
+		"maputnik:renderer": "mbgljs"
+	},
+	"glyphs": "https://mapcity.io/toronto-bia/assets/fonts/{fontstack}/{range}.pbf",
+	"sprite": "https://mapcity.io/toronto-bia/assets/sprites/sprites-maki",
+	"sources": {
+		"osm": {
+			"type": "vector",
+			"url": "https://vector.openstreetmap.org/shortbread_v1/tilejson.json"
+		},
+		"toronto": {
+			"type": "vector",
+			"tiles": ["https://mapcity.io/tiles/toronto/{z}/{x}/{y}.pbf"]
+		}
+	},
+	"layers": [
+		{
+			"id": "background",
+			"type": "background",
+			"paint": {
+				"background-color": "hsl(210, 30%, 80%)"
+			}
+		},
+		{
+			"id": "property",
+			"source": "toronto",
+			"source-layer": "propertyboundaries",
+            "filter": ["in", "FEATURE_TYPE", "CONDO","RESERVE","COMMON"],
+            "type": "fill",
+			"paint": {
+			  "fill-color": "hsl(24, 32%, 90%)",
+			  "fill-opacity": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 1]
+			}
+		},
+		{
+			"id": "property-line",
+			"source": "toronto",
+			"source-layer": "propertyboundaries",
+            "filter": ["in", "FEATURE_TYPE", "CONDO","RESERVE","COMMON"],
+			"type": "line",
+			"paint": {
+				"line-color": "hsl(0, 0%, 100%)",
+				"line-width": ["interpolate", ["linear"], ["zoom"], 13, 0, 15, 0.2, 16, 1],
+				"line-opacity": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 1]
+			}
+		},
+		{
+			"id": "centreline-label",
+			"source": "toronto",
+			"source-layer": "roads",
+			"type": "symbol",
+			"layout": {
+				"text-field": "{LINEAR_NAME_FULL}",
+				"text-transform": "uppercase",
+				"text-rotation-alignment": "map",
+				"text-font": [ "montserrat-regular" ],
+				"text-letter-spacing": 0.2,
+				"symbol-placement": "line",
+				"symbol-spacing": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 250, 18, 300 ],
+				"text-anchor": "center",
+				"text-size": [ "interpolate", [ "exponential", 1.5 ], [ "zoom" ], 10, 0, 20, 60 ]
+			},
+			"paint": {
+				"text-color": "hsl(0, 0%, 100%)",
+				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 1 ]
+			},
+			"minzoom": 15
+		}
+	]
+}
