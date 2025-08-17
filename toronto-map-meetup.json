@@ -7,11 +7,11 @@
 	"glyphs": "https://geographyclub.github.io/toronto-map-meetup/assets/fonts/{fontstack}/{range}.pbf",
 	"sprite": "https://geographyclub.github.io/toronto-map-meetup/assets/sprites/sprites",
 	"sources": {
-		"bing": {
+		"hybrid": {
 			"type": "raster",
-			"tiles": ["https://geographyclub.github.io/toronto-map-meetup/data/bing/{z}/{x}/{y}.png"],
+			"tiles": ["https://geographyclub.github.io/toronto-map-meetup/data/hybrid/{z}/{x}/{y}.png"],
 			"tileSize": 256,
-			"attribution": "&copy; Bing",
+			"attribution": "Bing | Open Data Toronto",
 			"maxzoom": 16
   },
 		"osm": {
@@ -28,16 +28,9 @@
 			}
 		},
 		{
-			"id": "bing",
+			"id": "hybrid",
 			"type": "raster",
-			"source": "bing",
-			"paint": {
-				"raster-hue-rotate": 0,
-				"raster-contrast": 0,
-				"raster-saturation": 0.7,
-				"raster-brightness-min": 0,
-				"raster-brightness-max": 1
-			}
+			"source": "hybrid"
 		}
 	]
 }
