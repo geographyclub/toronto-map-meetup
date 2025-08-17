@@ -18,17 +18,14 @@
 
     <script>
 
-        const minZoom = 15;
-        const maxZoom = 18;
-
         var map = new maplibregl.Map({
             container: 'map',
             style: 'style.json',
             center: [-79.3915, 43.64428],
             pixelRatio: 1,
             zoom: 16,
-            minZoom: minZoom,
-            maxZoom: maxZoom,
+            minZoom: 12,
+            maxZoom: 18,
             bearing: -16,
             pitch: 0,
             hash: true
@@ -42,7 +39,18 @@
                 tiles: ['https://mapcity.io/toronto-bia/data/toronto_buildings/{z}/{x}/{y}.pbf']
             });
 
-            // Add 3d buildings
+        // Add fill layer using the pattern
+        map.addLayer({
+  "id": "pattern-fill",
+  "type": "fill",
+  "source": "toronto_buildings",
+  "source-layer": "toronto_buildings",
+  "paint": {
+    "fill-pattern": "hatch"
+  }
+        });
+
+            // Add building heights
             map.addLayer({
                 'id': 'buildings',
                 'source': 'toronto_buildings',

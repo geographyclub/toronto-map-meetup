@@ -18,6 +18,10 @@
 		"toronto_roadway": {
 			"type": "vector",
 			"tiles": ["https://mapcity.io/toronto-bia/data/toronto_roadway/{z}/{x}/{y}.pbf"]
+		},
+		"toronto_neighborhoods": {
+			"type": "vector",
+			"tiles": ["https://mapcity.io/toronto-bia/data/toronto_neighborhoods/{z}/{x}/{y}.pbf"]
 		}
 	},
 	"layers": [
@@ -25,7 +29,7 @@
 			"id": "background",
 			"type": "background",
 			"paint": {
-				"background-color": "hsl(24, 32%, 90%)"
+				"background-color": "hsl(24, 32%, 85%)"
 			}
 		},
 		{
@@ -35,7 +39,7 @@
             "filter": ["in", "FEATURE_TYPE", "CONDO","RESERVE","COMMON"],
             "type": "fill",
 			"paint": {
-			  "fill-color": "hsl(24, 32%, 90%)",
+			  "fill-color": "hsl(24, 32%, 85%)",
 			  "fill-opacity": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 1]
 			}
 		},
@@ -50,6 +54,18 @@
 				"line-width": ["interpolate", ["linear"], ["zoom"], 13, 0, 15, 0.2, 16, 1],
 				"line-opacity": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 1]
 			}
+		},
+		{
+			"id": "roadway-casing",
+			"source": "toronto_roadway",
+			"source-layer": "toronto_roadway",
+            "type": "line",
+			"paint": {
+			  "line-color": "hsl(210, 20%, 70%)",
+			  "line-width": 3,
+			  "line-opacity": ["interpolate", ["linear"], ["zoom"], 16, 0, 17, 1]
+			},
+			"minzoom": 16
 		},
 		{
 			"id": "roadway",
@@ -75,13 +91,26 @@
 				"symbol-placement": "line",
 				"symbol-spacing": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 250, 18, 300 ],
 				"text-anchor": "center",
-				"text-size": [ "interpolate", [ "exponential", 1.5 ], [ "zoom" ], 10, 0, 20, 60 ]
+				"text-size": [ "interpolate", [ "exponential", 1.5 ], [ "zoom" ], 10, 0, 20, 50 ]
 			},
 			"paint": {
 				"text-color": "hsl(0, 0%, 100%)",
 				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 1 ]
 			},
 			"minzoom": 15
+		},
+		{
+			"id": "neighborhood-outlines",
+			"source": "toronto_neighborhoods",
+			"source-layer": "toronto_neighborhoods",
+			"type": "line",
+			"paint": {
+				"line-color": "hsl(0, 0%, 100%)",
+				"line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 15, 2, 16, 10],
+				"line-opacity": ["interpolate", ["linear"], ["zoom"], 15, 1, 16, 0]
+			},
+			"minzoom": 12,
+			"maxzoom": 16
 		}
 	]
 }

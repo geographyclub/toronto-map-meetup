@@ -155,15 +155,3 @@ Fill extrusion:
     "minzoom": 15
 }
 ```
-
-## Styling in QGIS
-
-### Import vector tiles
-
-1. Go to **Layer → Add Layer → Add Vector Tile Layer**
-2. **Vector Tile Service (URL)** → paste your url:
-```
-https://mapcity.io/tiles/toronto/{z}/{x}/{y}.pbf
-```
-3. Give it a name
-4. Click **Add**
