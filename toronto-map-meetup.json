@@ -11,15 +11,12 @@
 			"type": "raster",
 			"tiles": ["https://geographyclub.github.io/toronto-map-meetup/data/bing/{z}/{x}/{y}.png"],
 			"tileSize": 256,
-			"attribution": "&copy; Bing"
+			"attribution": "&copy; Bing",
+			"maxzoom": 16
   },
 		"osm": {
 			"type": "vector",
 			"url": "https://vector.openstreetmap.org/shortbread_v1/tilejson.json"
-		},
-		"roadway": {
-			"type": "vector",
-			"tiles": ["https://geographyclub.github.io/toronto-map-meetup/data/roadway/{z}/{x}/{y}.pbf"]
 		}
 	},
 	"layers": [
@@ -40,27 +37,6 @@
 				"raster-saturation": 0.7,
 				"raster-brightness-min": 0,
 				"raster-brightness-max": 1
-			}
-		},
-		{
-			"id": "roadway",
-			"type": "fill",
-			"source": "roadway",
-			"source-layer": "roadway",
-			"paint": {
-				"fill-color": "hsl(0, 0%, 100%)",
-				"fill-opacity": 0.7
-			}
-		},
-		{
-			"id": "roadway-line",
-			"type": "line",
-			"source": "roadway",
-			"source-layer": "roadway",
-			"paint": {
-				"line-color": "hsl(0, 0%, 0%)",
-				"line-width": 1,
-				"line-opacity": 1
 			}
 		}
 	]
