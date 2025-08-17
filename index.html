@@ -65,21 +65,6 @@
         });
 
         map.on('click', (e) => {
-            // Option 1: Query ALL features from a specific source (even if not rendered)
-            // const sourceFeatures = map.querySourceFeatures('your-source-name', {
-            //     sourceLayer: 'your-source-layer' // Required for vector tiles
-            // });
-
-            // if (sourceFeatures.length > 0) {
-            //     sourceFeatures.forEach((feature, index) => {
-            //         console.log(`Source Feature ${index + 1}:`, feature);
-            //         console.log(`Properties:`, feature.properties);
-            //     });
-            // } else {
-            //     console.log('No source features found.');
-            // }
-
-            // Option 2: Keep the original rendered features check (optional)
             const renderedFeatures = map.queryRenderedFeatures(e.point);
             console.log('Rendered features at click:', renderedFeatures);
         });
