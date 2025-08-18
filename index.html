@@ -39,26 +39,6 @@
                 tiles: ['https://mapcity.io/toronto-bia/data/toronto_buildings/{z}/{x}/{y}.pbf']
             });
 
-            // Add building heights
-            map.addLayer({
-                'id': 'buildings',
-                'source': 'toronto_buildings',
-                'source-layer': 'toronto_buildings',
-                'type': 'fill-extrusion',
-                'paint': {
-                    'fill-extrusion-color': 'hsl(0, 0%, 100%)',
-                    'fill-extrusion-height': [
-                        'case',
-                        ['!=', ['get', 'max_height'], null], ['get', 'max_height'],
-                        ['!=', ['get', 'avg_height'], null], ['get', 'avg_height'],
-                        10
-                    ],
-                    'fill-extrusion-base': 0,
-                    'fill-extrusion-opacity': ['interpolate', ['linear'], ['zoom'], 15, 0, 16, 0.4, 17, 0.4, 18, 0]
-                },
-                'minzoom': 15
-            });
-
         });
 
         map.on('click', (e) => {

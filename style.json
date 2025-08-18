@@ -14,14 +14,6 @@
 		"toronto": {
 			"type": "vector",
 			"tiles": ["https://mapcity.io/tiles/toronto/{z}/{x}/{y}.pbf"]
-		},
-		"toronto_roadway": {
-			"type": "vector",
-			"tiles": ["https://mapcity.io/toronto-bia/data/toronto_roadway/{z}/{x}/{y}.pbf"]
-		},
-		"toronto_neighborhoods": {
-			"type": "vector",
-			"tiles": ["https://mapcity.io/toronto-bia/data/toronto_neighborhoods/{z}/{x}/{y}.pbf"]
 		}
 	},
 	"layers": [
@@ -29,18 +21,7 @@
 			"id": "background",
 			"type": "background",
 			"paint": {
-				"background-color": "hsl(24, 32%, 85%)"
-			}
-		},
-		{
-			"id": "property",
-			"source": "toronto",
-			"source-layer": "propertyboundaries",
-            "filter": ["in", "FEATURE_TYPE", "CONDO","RESERVE","COMMON"],
-            "type": "fill",
-			"paint": {
-			  "fill-color": "hsl(24, 32%, 85%)",
-			  "fill-opacity": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 1]
+				"background-color": "hsl(252, 18%, 27%)"
 			}
 		},
 		{
@@ -50,67 +31,149 @@
             "filter": ["in", "FEATURE_TYPE", "CONDO","RESERVE","COMMON"],
 			"type": "line",
 			"paint": {
-				"line-color": "hsl(0, 0%, 100%)",
+				"line-color": "hsl(233, 15%, 57%)",
 				"line-width": ["interpolate", ["linear"], ["zoom"], 13, 0, 15, 0.2, 16, 1],
 				"line-opacity": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 1]
 			}
 		},
 		{
-			"id": "roadway-casing",
-			"source": "toronto_roadway",
-			"source-layer": "toronto_roadway",
-            "type": "line",
-			"paint": {
-			  "line-color": "hsl(210, 20%, 70%)",
-			  "line-width": 3,
-			  "line-opacity": ["interpolate", ["linear"], ["zoom"], 16, 0, 17, 1]
-			},
-			"minzoom": 16
-		},
-		{
-			"id": "roadway",
-			"source": "toronto_roadway",
-			"source-layer": "toronto_roadway",
-            "type": "fill",
-			"paint": {
-			  "fill-color": "hsl(210, 20%, 80%)",
-			  "fill-opacity": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 1]
-			}
-		},
-		{
-			"id": "centreline-label",
-			"source": "toronto",
-			"source-layer": "roads",
+			"source": "osm",
+			"id": "highway-name-minor",
 			"type": "symbol",
+			"source-layer": "street_labels",
+			"filter": [ "in", "kind", "unclassified", "residential", "living_street" ],
 			"layout": {
-				"text-field": "{LINEAR_NAME_FULL}",
+				"text-field": "{name}",
 				"text-transform": "uppercase",
 				"text-rotation-alignment": "map",
-				"text-font": [ "montserrat-regular" ],
+				"text-font": [ "montserrat-semibold" ],
 				"text-letter-spacing": 0.2,
 				"symbol-placement": "line",
-				"symbol-spacing": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 250, 18, 300 ],
+				"symbol-spacing": 250,
 				"text-anchor": "center",
-				"text-size": [ "interpolate", [ "exponential", 1.5 ], [ "zoom" ], 10, 0, 20, 50 ]
+				"text-size": [ "interpolate", [ "exponential", 1.5 ], [ "zoom" ], 10, 0, 20, 25 ]
 			},
 			"paint": {
-				"text-color": "hsl(0, 0%, 100%)",
+				"text-color": "hsl(0, 0%, 20%)",
 				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 1 ]
 			},
 			"minzoom": 15
 		},
 		{
-			"id": "neighborhood-outlines",
-			"source": "toronto_neighborhoods",
-			"source-layer": "toronto_neighborhoods",
-			"type": "line",
-			"paint": {
-				"line-color": "hsl(0, 0%, 100%)",
-				"line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 15, 2, 16, 10],
-				"line-opacity": ["interpolate", ["linear"], ["zoom"], 15, 1, 16, 0]
+			"source": "osm",
+			"id": "highway-name-major",
+			"type": "symbol",
+			"source-layer": "street_labels",
+			"filter": [ "in", "kind", "motorway", "trunk", "primary", "secondary", "tertiary" ],
+			"layout": {
+				"text-field": "{name}",
+				"text-transform": "uppercase",
+				"text-rotation-alignment": "map",
+				"text-font": [ "montserrat-semibold" ],
+				"text-letter-spacing": 0.2,
+				"symbol-placement": "line",
+				"symbol-spacing": 250,
+				"text-anchor": "center",
+				"text-size": [ "interpolate", [ "exponential", 1.5 ], [ "zoom" ], 10, 0, 20, 30 ]
 			},
-			"minzoom": 12,
-			"maxzoom": 16
+			"paint": {
+				"text-color": "hsl(0, 0%, 20%)",
+				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 1 ]
+			},
+			"minzoom": 15
+		},
+		{
+			"source": "osm",
+			"id": "poi-amenity",
+			"type": "symbol",
+			"source-layer": "pois",
+			"filter": [ "all", [ "to-boolean", [ "get", "amenity" ] ], ["!=", ["get", "name"], null] ],
+			"layout": {
+				"icon-size": 0.5,
+				"symbol-placement": "point",
+				"icon-optional": true,
+				"icon-image": [ "match", [ "get", "amenity" ], "arts_centre", "icon-art_gallery", "atm", "icon-atm", "bank", "icon-bank", "bar", "icon-bar", "bench", "icon-bench", "bicycle_rental", "icon-bicycle_share", "biergarten", "icon-beergarden", "cafe", "icon-cafe", "car_rental", "icon-car_rental", "car_sharing", "icon-car_rental", "car_wash", "icon-car_wash", "cinema", "icon-cinema", "college", "icon-college", "community_centre", "icon-community", "dentist", "icon-dentist", "doctors", "icon-doctor", "dog_park", "icon-dog_park", "drinking_water", "icon-drinking_water", "embassy", "icon-embassy", "fast_food", "icon-fast_food", "fire_station", "icon-fire_station", "fountain", "icon-fountain", "grave_yard", "icon-cemetery", "hospital", "icon-hospital", "hunting_stand", "icon-huntingstand", "library", "icon-library", "marketplace", "icon-marketplace", "nightclub", "icon-nightclub", "nursing_home", "icon-nursinghome", "pharmacy", "icon-pharmacy", "place_of_worship", "icon-place_of_worship", "playground", "icon-playground", "police", "icon-police", "post_box", "icon-postbox", "post_office", "icon-post", "prison", "icon-prison", "pub", "icon-beer", "recycling", "icon-recycling", "restaurant", "icon-restaurant", "school", "icon-school", "shelter", "icon-shelter", "telephone", "icon-telephone", "theatre", "icon-theatre", "toilets", "icon-toilet", "townhall", "icon-town_hall", "vending_machine", "icon-vendingmachine", "veterinary", "icon-veterinary", "waste_basket", "icon-waste_basket", "marker" ],
+				"text-font": [ "montserrat-regular" ],
+				"text-size": 10,
+				"text-field": ["get", "name"],
+				"text-max-width": 8,
+				"text-line-height": 1,
+				"icon-anchor": "bottom",
+				"text-anchor": "top",
+				"icon-allow-overlap": false,
+				"text-allow-overlap": false,
+				"icon-ignore-placement": false,
+				"text-ignore-placement": false
+			},
+			"paint": {
+				"icon-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 1 ],
+				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 1 ],
+				"icon-color": "hsl(227, 89%, 90%)",
+				"text-color": "hsl(227, 89%, 90%)"
+			},
+			"minzoom": 15
+		},
+		{
+			"source": "osm",
+			"id": "symbol-transit",
+			"type": "symbol",
+			"source-layer": "public_transport",
+			"filter": [ "in", "kind", "bus_stop", "tram_stop", "light_rail" ],
+			"layout": {
+				"text-field": "{name}",
+				"icon-size": 0.5,
+				"symbol-placement": "point",
+				"text-font": [ "montserrat-semibold" ],
+				"text-size": 10,
+				"icon-anchor": "bottom",
+				"text-anchor": "top",
+				"icon-image": "icon-bus",
+				"icon-allow-overlap": false,
+				"text-allow-overlap": false,
+				"icon-ignore-placement": false,
+				"text-ignore-placement": false
+			},
+			"paint": {
+				"icon-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 14, 0, 15, 1 ],
+				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 14, 0, 15, 1 ],
+				"icon-color": "hsl(310, 100%, 90%)",
+				"text-color": "hsl(310, 100%, 90%)",
+				"text-halo-color": "hsl(0, 0%, 20%)",
+				"text-halo-width": 0,
+				"text-halo-blur": 0
+			},
+			"minzoom": 14
+		},
+		{
+			"source": "osm",
+			"id": "symbol-transit-subway",
+			"type": "symbol",
+			"source-layer": "public_transport",
+			"filter": [ "in", "kind", "station" ],
+			"layout": {
+				"text-field": "{name}",
+				"icon-size": 0.5,
+				"symbol-placement": "point",
+				"text-font": [ "montserrat-semibold" ],
+				"text-size": 10,
+				"icon-anchor": "bottom",
+				"text-anchor": "top",
+				"icon-image": "icon-rail_metro",
+				"icon-allow-overlap": true,
+				"text-allow-overlap": true,
+				"icon-ignore-placement": false,
+				"text-ignore-placement": false
+			},
+			"paint": {
+				"icon-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 13, 0, 14, 1 ],
+				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 13, 0, 14, 1 ],
+				"icon-color": "hsl(310, 100%, 90%)",
+				"text-color": "hsl(310, 100%, 90%)",
+				"text-halo-color": "hsl(0, 0%, 20%)",
+				"text-halo-width": 0,
+				"text-halo-blur": 0
+			},
+			"minzoom": 13
 		}
 	]
 }
