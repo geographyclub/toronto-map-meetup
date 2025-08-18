@@ -14,6 +14,10 @@
 		"toronto": {
 			"type": "vector",
 			"tiles": ["https://mapcity.io/tiles/toronto/{z}/{x}/{y}.pbf"]
+		},
+		"toronto-contours": {
+			"type": "vector",
+			"tiles": ["https://geographyclub.github.io/toronto-map-meetup/data/toronto-contours/{z}/{x}/{y}.pbf"]
 		}
 	},
 	"layers": [
@@ -47,7 +51,7 @@
 			}
 		},
 		{
-			"id": "centrline-glow",
+			"id": "centreline-glow",
 			"source": "toronto",
 			"source-layer": "roads",
 			"type": "line",
@@ -81,6 +85,20 @@
 			}
 		},
 		{
+			"id": "poi-circle",
+			"source": "osm",
+			"source-layer": "pois",
+			"filter": ["has", "name"],
+			"type": "circle",
+			"paint": {
+				"circle-radius": [ "interpolate", [ "linear" ], [ "zoom" ], 12, 0, 18, 3 ],
+				"circle-color": "hsl(252, 18%, 27%)",
+				"circle-stroke-width": 1,
+				"circle-stroke-color": "hsl(227, 89%, 90%)",
+				"circle-opacity": 1
+			}
+		},
+		{
 			"id": "centreline-label",
 			"source": "toronto",
 			"source-layer": "roads",
@@ -103,21 +121,7 @@
 			"minzoom": 15
 		},
 		{
-			"id": "poi-circle",
-			"source": "osm",
-			"source-layer": "pois",
-			"filter": ["has", "name"],
-			"type": "circle",
-			"paint": {
-				"circle-radius": [ "interpolate", [ "linear" ], [ "zoom" ], 12, 0, 18, 3 ],
-				"circle-color": "hsl(252, 18%, 27%)",
-				"circle-stroke-width": 1,
-				"circle-stroke-color": "hsl(227, 89%, 90%)",
-				"circle-opacity": 1
-			}
-		},
-		{
-			"id": "poi",
+			"id": "poi-label",
 			"source": "osm",
 			"source-layer": "pois",
 			"type": "symbol",
