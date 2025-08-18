@@ -29,6 +29,24 @@
 			}
 		},
 		{
+			"id": "property-fill",
+			"source": "toronto",
+			"source-layer": "propertyboundaries",
+			"filter": ["in", "FEATURE_TYPE", "CONDO", "RESERVE", "COMMON"],
+			"type": "fill",
+			"paint": {
+				"fill-color": [
+					"case",
+					["in", ["get", "FEATURE_TYPE"], "CONDO"], "hsl(24, 32%, 80%)",
+					["in", ["get", "FEATURE_TYPE"], "CORRIDOR"], "hsl(210, 30%, 80%)",
+					["in", ["get", "FEATURE_TYPE"], "RESERVE"], "hsl(24, 32%, 85%)",
+					["in", ["get", "FEATURE_TYPE"], "COMMON"], "hsl(24, 32%, 95%)",
+					"hsl(0, 0%, 95%)"
+				],
+				"fill-opacity": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 0.1]
+			}
+		},
+		{
 			"id": "property-line",
 			"source": "toronto",
 			"source-layer": "propertyboundaries",

@@ -72,7 +72,7 @@
                 "type": "fill",
                 "paint": {
                 "fill-color": "hsl(0, 0%, 100%)",
-                "fill-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 1, 17, 0 ]
+                "fill-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 0.5, 17, 0 ]
                 },
                 "minzoom": 15
             })
@@ -83,7 +83,7 @@
                 "source-layer": "toronto_buildings",
                 "type": "fill-extrusion",
                 "paint": {
-                    "fill-extrusion-color": "hsl(0, 0%, 100%)",
+                    "fill-extrusion-color": "hsl(0, 0%, 80%)",
                     "fill-extrusion-height": [
                         "case",
                         ["!=", ["get", "max_height"], null], ["get", "max_height"],
@@ -91,7 +91,7 @@
                         10
                     ],
                     "fill-extrusion-base": 0,
-                    "fill-extrusion-opacity": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 0.7, 17, 0.7, 18, 0]
+                    "fill-extrusion-opacity": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 0.5, 17, 0.5, 18, 0]
                 },
                 "minzoom": 15
             });
