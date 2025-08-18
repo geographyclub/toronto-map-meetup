@@ -155,3 +155,38 @@ Fill extrusion:
     "minzoom": 15
 }
 ```
+
+```
+// Add neighborhood centroids
+            map.addSource('toronto_neighborhoods_centroids', {
+                'type': 'geojson',
+                'data': 'https://torontotechweek.github.io/data/toronto_neighborhoods_centroids.geojson'
+            });
+
+
+
+            // Add neighborhood labels
+            map.addLayer({
+                id: 'neighborhoods-labels',
+                type: 'symbol',
+                source: 'toronto_neighborhoods_centroids',
+                layout: {
+                    'text-field': ['get', 'area_name'],
+                    'text-size': ['interpolate', ['exponential', 1.1], ['zoom'], 10, 1, 18, 50],
+                    'text-font': ['montserrat-regular'],
+                    'text-max-width': 5,
+                    'text-line-height': 1,
+                    'text-allow-overlap': true,
+                    'text-ignore-placement': true,
+                    //'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+                    'text-rotation-alignment': 'viewport',
+                    'text-pitch-alignment': 'viewport'
+                },
+                paint: {
+                    'text-color': 'hsl(227, 89%, 90%)',
+                    'text-opacity': ['interpolate', ['linear'], ['zoom'], 11, 0, 12, 0.8, 14, 0.8, 16, 0]
+                },
+                "minzoom": 11,
+                "maxzoom": 16
+            });
+```
