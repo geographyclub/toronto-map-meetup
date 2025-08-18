@@ -69,25 +69,14 @@
 			}
 		},
 		{
-			"id": "centreline-glow",
-			"source": "toronto",
-			"source-layer": "roads",
-			"type": "line",
-			"paint": {
-				"line-color": "hsl(310, 100%, 90%)",
-				"line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 15, 2, 16, 10],
-				"line-opacity": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 0.1]
-			},
-			"minzoom": 14
-		},
-		{
 			"id": "centreline",
 			"source": "toronto",
 			"source-layer": "roads",
 			"type": "line",
 			"paint": {
 			  "line-color": "hsl(310, 100%, 90%)",
-			  "line-width": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 1]
+			  "line-width": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 2],
+			  "line-opacity": 0.5
 			},
 			"minzoom": 14
 		},
@@ -97,9 +86,12 @@
 			"source-layer": "roads",
 			"type": "circle",
 			"paint": {
-				"circle-radius": [ "interpolate", [ "linear" ], [ "zoom" ], 12, 0, 16, 3 ],
+				"circle-radius": [ "interpolate", [ "linear" ], [ "zoom" ], 12, 0, 16, 2.5 ],
 				"circle-color": "hsl(310, 100%, 90%)",
-				"circle-opacity": 1
+				"circle-opacity": 0.5,
+				"circle-stroke-width": 1,
+				"circle-stroke-color": "hsl(227, 89%, 90%)",
+				"circle-stroke-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 14, 0, 15, 0.1 ]
 			}
 		},
 		{
