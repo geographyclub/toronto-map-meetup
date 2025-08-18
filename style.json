@@ -28,7 +28,6 @@
 			"id": "property-line",
 			"source": "toronto",
 			"source-layer": "propertyboundaries",
-            "filter": ["in", "FEATURE_TYPE", "CONDO","RESERVE","COMMON"],
 			"type": "line",
 			"paint": {
 				"line-color": "hsl(233, 15%, 57%)",
@@ -37,143 +36,107 @@
 			}
 		},
 		{
-			"source": "osm",
-			"id": "highway-name-minor",
-			"type": "symbol",
-			"source-layer": "street_labels",
-			"filter": [ "in", "kind", "unclassified", "residential", "living_street" ],
-			"layout": {
-				"text-field": "{name}",
-				"text-transform": "uppercase",
-				"text-rotation-alignment": "map",
-				"text-font": [ "montserrat-semibold" ],
-				"text-letter-spacing": 0.2,
-				"symbol-placement": "line",
-				"symbol-spacing": 250,
-				"text-anchor": "center",
-				"text-size": [ "interpolate", [ "exponential", 1.5 ], [ "zoom" ], 10, 0, 20, 25 ]
-			},
+			"id": "property-circle",
+			"source": "toronto",
+			"source-layer": "propertyboundaries",
+			"type": "circle",
 			"paint": {
-				"text-color": "hsl(0, 0%, 20%)",
-				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 1 ]
-			},
-			"minzoom": 15
+				"circle-radius": [ "interpolate", [ "linear" ], [ "zoom" ], 12, 0, 16, 2 ],
+				"circle-color": "hsl(233, 15%, 57%)",
+				"circle-opacity": 1
+			}
 		},
 		{
-			"source": "osm",
-			"id": "highway-name-major",
-			"type": "symbol",
-			"source-layer": "street_labels",
-			"filter": [ "in", "kind", "motorway", "trunk", "primary", "secondary", "tertiary" ],
-			"layout": {
-				"text-field": "{name}",
-				"text-transform": "uppercase",
-				"text-rotation-alignment": "map",
-				"text-font": [ "montserrat-semibold" ],
-				"text-letter-spacing": 0.2,
-				"symbol-placement": "line",
-				"symbol-spacing": 250,
-				"text-anchor": "center",
-				"text-size": [ "interpolate", [ "exponential", 1.5 ], [ "zoom" ], 10, 0, 20, 30 ]
-			},
+			"id": "centrline-glow",
+			"source": "toronto",
+			"source-layer": "roads",
+			"type": "line",
 			"paint": {
-				"text-color": "hsl(0, 0%, 20%)",
-				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 1 ]
-			},
-			"minzoom": 15
-		},
-		{
-			"source": "osm",
-			"id": "poi-amenity",
-			"type": "symbol",
-			"source-layer": "pois",
-			"filter": [ "all", [ "to-boolean", [ "get", "amenity" ] ], ["!=", ["get", "name"], null] ],
-			"layout": {
-				"icon-size": 0.5,
-				"symbol-placement": "point",
-				"icon-optional": true,
-				"icon-image": [ "match", [ "get", "amenity" ], "arts_centre", "icon-art_gallery", "atm", "icon-atm", "bank", "icon-bank", "bar", "icon-bar", "bench", "icon-bench", "bicycle_rental", "icon-bicycle_share", "biergarten", "icon-beergarden", "cafe", "icon-cafe", "car_rental", "icon-car_rental", "car_sharing", "icon-car_rental", "car_wash", "icon-car_wash", "cinema", "icon-cinema", "college", "icon-college", "community_centre", "icon-community", "dentist", "icon-dentist", "doctors", "icon-doctor", "dog_park", "icon-dog_park", "drinking_water", "icon-drinking_water", "embassy", "icon-embassy", "fast_food", "icon-fast_food", "fire_station", "icon-fire_station", "fountain", "icon-fountain", "grave_yard", "icon-cemetery", "hospital", "icon-hospital", "hunting_stand", "icon-huntingstand", "library", "icon-library", "marketplace", "icon-marketplace", "nightclub", "icon-nightclub", "nursing_home", "icon-nursinghome", "pharmacy", "icon-pharmacy", "place_of_worship", "icon-place_of_worship", "playground", "icon-playground", "police", "icon-police", "post_box", "icon-postbox", "post_office", "icon-post", "prison", "icon-prison", "pub", "icon-beer", "recycling", "icon-recycling", "restaurant", "icon-restaurant", "school", "icon-school", "shelter", "icon-shelter", "telephone", "icon-telephone", "theatre", "icon-theatre", "toilets", "icon-toilet", "townhall", "icon-town_hall", "vending_machine", "icon-vendingmachine", "veterinary", "icon-veterinary", "waste_basket", "icon-waste_basket", "marker" ],
-				"text-font": [ "montserrat-regular" ],
-				"text-size": 10,
-				"text-field": ["get", "name"],
-				"text-max-width": 8,
-				"text-line-height": 1,
-				"icon-anchor": "bottom",
-				"text-anchor": "top",
-				"icon-allow-overlap": false,
-				"text-allow-overlap": false,
-				"icon-ignore-placement": false,
-				"text-ignore-placement": false
-			},
-			"paint": {
-				"icon-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 1 ],
-				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 1 ],
-				"icon-color": "hsl(227, 89%, 90%)",
-				"text-color": "hsl(227, 89%, 90%)"
-			},
-			"minzoom": 15
-		},
-		{
-			"source": "osm",
-			"id": "symbol-transit",
-			"type": "symbol",
-			"source-layer": "public_transport",
-			"filter": [ "in", "kind", "bus_stop", "tram_stop", "light_rail" ],
-			"layout": {
-				"text-field": "{name}",
-				"icon-size": 0.5,
-				"symbol-placement": "point",
-				"text-font": [ "montserrat-semibold" ],
-				"text-size": 10,
-				"icon-anchor": "bottom",
-				"text-anchor": "top",
-				"icon-image": "icon-bus",
-				"icon-allow-overlap": false,
-				"text-allow-overlap": false,
-				"icon-ignore-placement": false,
-				"text-ignore-placement": false
-			},
-			"paint": {
-				"icon-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 14, 0, 15, 1 ],
-				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 14, 0, 15, 1 ],
-				"icon-color": "hsl(310, 100%, 90%)",
-				"text-color": "hsl(310, 100%, 90%)",
-				"text-halo-color": "hsl(0, 0%, 20%)",
-				"text-halo-width": 0,
-				"text-halo-blur": 0
+				"line-color": "hsl(310, 100%, 90%)",
+				"line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 15, 2, 16, 10],
+				"line-opacity": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 0.1]
 			},
 			"minzoom": 14
 		},
 		{
-			"source": "osm",
-			"id": "symbol-transit-subway",
+			"id": "centreline",
+			"source": "toronto",
+			"source-layer": "roads",
+			"type": "line",
+			"paint": {
+			  "line-color": "hsl(310, 100%, 90%)",
+			  "line-width": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 2]
+			},
+			"minzoom": 14
+		},
+		{
+			"id": "centreline-circle",
+			"source": "toronto",
+			"source-layer": "roads",
+			"type": "circle",
+			"paint": {
+				"circle-radius": [ "interpolate", [ "linear" ], [ "zoom" ], 12, 0, 16, 3 ],
+				"circle-color": "hsl(310, 100%, 90%)",
+				"circle-opacity": 1
+			}
+		},
+		{
+			"id": "centreline-label",
+			"source": "toronto",
+			"source-layer": "roads",
 			"type": "symbol",
-			"source-layer": "public_transport",
-			"filter": [ "in", "kind", "station" ],
 			"layout": {
-				"text-field": "{name}",
-				"icon-size": 0.5,
-				"symbol-placement": "point",
-				"text-font": [ "montserrat-semibold" ],
-				"text-size": 10,
-				"icon-anchor": "bottom",
-				"text-anchor": "top",
-				"icon-image": "icon-rail_metro",
-				"icon-allow-overlap": true,
-				"text-allow-overlap": true,
-				"icon-ignore-placement": false,
-				"text-ignore-placement": false
+				"text-field": "{LINEAR_NAME_FULL}",
+				"text-transform": "uppercase",
+				"text-rotation-alignment": "map",
+				"text-font": [ "aldrich" ],
+				"text-letter-spacing": 0.2,
+				"symbol-placement": "line",
+				"symbol-spacing": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 250, 18, 300 ],
+				"text-anchor": "bottom",
+				"text-size": [ "interpolate", [ "exponential", 1.5 ], [ "zoom" ], 10, 0, 20, 50 ]
 			},
 			"paint": {
-				"icon-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 13, 0, 14, 1 ],
-				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 13, 0, 14, 1 ],
-				"icon-color": "hsl(310, 100%, 90%)",
 				"text-color": "hsl(310, 100%, 90%)",
-				"text-halo-color": "hsl(0, 0%, 20%)",
-				"text-halo-width": 0,
-				"text-halo-blur": 0
+				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 1 ]
 			},
-			"minzoom": 13
+			"minzoom": 15
+		},
+		{
+			"id": "poi-circle",
+			"source": "osm",
+			"source-layer": "pois",
+			"filter": ["has", "name"],
+			"type": "circle",
+			"paint": {
+				"circle-radius": [ "interpolate", [ "linear" ], [ "zoom" ], 12, 0, 18, 3 ],
+				"circle-color": "hsl(252, 18%, 27%)",
+				"circle-stroke-width": 1,
+				"circle-stroke-color": "hsl(227, 89%, 90%)",
+				"circle-opacity": 1
+			}
+		},
+		{
+			"id": "poi",
+			"source": "osm",
+			"source-layer": "pois",
+			"type": "symbol",
+			"filter": ["has", "name"],
+			"layout": {
+				"text-font": [ "aldrich" ],
+				"text-size": 9,
+				"text-field": ["get", "name"],
+				"text-max-width": 8,
+				"text-line-height": 1,
+				"text-anchor": "top",
+				"text-ignore-placement": false,
+				"text-offset": [0, 1]
+			},
+			"paint": {
+				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 1 ],
+				"text-color": "hsl(227, 89%, 90%)"
+			},
+			"minzoom": 15
 		}
 	]
 }
