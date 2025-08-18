@@ -129,18 +129,6 @@
 				"text-color": "hsl(227, 89%, 90%)"
 			},
 			"minzoom": 15
-		},
-		{
-			"id": "toronto-contours",
-			"source": "toronto_contours",
-			"source-layer": "toronto_contours",
-			"type": "fill",
-			"paint": {
-				"fill-color": "hsl(233, 15%, 100%)",
-				"fill-opacity": ["interpolate", ["linear"], ["zoom"], 14, 1, 15, 0]
-			},
-			"minzoom": 14,
-			"maxzoom": 15
 		}
 	]
 }

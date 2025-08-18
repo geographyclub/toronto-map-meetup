@@ -33,12 +33,6 @@
 
         map.on('load', async () => {
 
-            // Add buildings source
-            map.addSource('toronto_buildings', {
-                type: 'vector',
-                tiles: ['https://mapcity.io/toronto-bia/data/toronto_buildings/{z}/{x}/{y}.pbf']
-            });
-
         });
 
         map.on('click', (e) => {
