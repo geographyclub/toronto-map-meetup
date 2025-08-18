@@ -14,10 +14,6 @@
 		"toronto": {
 			"type": "vector",
 			"tiles": ["https://mapcity.io/tiles/toronto/{z}/{x}/{y}.pbf"]
-		},
-		"toronto_contours": {
-			"type": "vector",
-			"tiles": ["https://geographyclub.github.io/toronto-map-meetup/data/toronto_contours/{z}/{x}/{y}.pbf"]
 		}
 	},
 	"layers": [
