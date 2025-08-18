@@ -33,6 +33,28 @@
 
         map.on('load', async () => {
 
+			// Add ontario line stations
+			map.addSource('ontario_line_stations', {
+				'type': 'geojson',
+				'data': 'data/ontario_line_stations.geojson'
+			});
+
+            map.addLayer({
+                "id": "ontario_line_stations",
+                "source": "ontario_line_stations",
+                "type": "fill",
+                "paint": {
+                    "fill-color": "hsl(55, 95%, 100%)",
+                    "fill-opacity": [
+                        "step", ["get", "distance"],
+                        0,
+                        100, 0.3,
+                        200, 0.2,
+                        300, 0.1
+                    ]
+                }
+            });
+
         });
 
         map.on('click', (e) => {
