@@ -15,9 +15,9 @@
 			"type": "vector",
 			"tiles": ["https://mapcity.io/tiles/toronto/{z}/{x}/{y}.pbf"]
 		},
-		"toronto-contours": {
+		"toronto_contours": {
 			"type": "vector",
-			"tiles": ["https://geographyclub.github.io/toronto-map-meetup/data/toronto-contours/{z}/{x}/{y}.pbf"]
+			"tiles": ["https://geographyclub.github.io/toronto-map-meetup/data/toronto_contours/{z}/{x}/{y}.pbf"]
 		}
 	},
 	"layers": [
@@ -69,7 +69,7 @@
 			"type": "line",
 			"paint": {
 			  "line-color": "hsl(310, 100%, 90%)",
-			  "line-width": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 2]
+			  "line-width": ["interpolate", ["linear"], ["zoom"], 15, 0, 16, 1]
 			},
 			"minzoom": 14
 		},
@@ -85,20 +85,6 @@
 			}
 		},
 		{
-			"id": "poi-circle",
-			"source": "osm",
-			"source-layer": "pois",
-			"filter": ["has", "name"],
-			"type": "circle",
-			"paint": {
-				"circle-radius": [ "interpolate", [ "linear" ], [ "zoom" ], 12, 0, 18, 3 ],
-				"circle-color": "hsl(252, 18%, 27%)",
-				"circle-stroke-width": 1,
-				"circle-stroke-color": "hsl(227, 89%, 90%)",
-				"circle-opacity": 1
-			}
-		},
-		{
 			"id": "centreline-label",
 			"source": "toronto",
 			"source-layer": "roads",
@@ -110,9 +96,8 @@
 				"text-font": [ "aldrich" ],
 				"text-letter-spacing": 0.2,
 				"symbol-placement": "line",
-				"symbol-spacing": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 250, 18, 300 ],
 				"text-anchor": "bottom",
-				"text-size": [ "interpolate", [ "exponential", 1.5 ], [ "zoom" ], 10, 0, 20, 50 ]
+				"text-size": [ "interpolate", [ "exponential", 1.5 ], [ "zoom" ], 10, 0, 20, 30 ]
 			},
 			"paint": {
 				"text-color": "hsl(310, 100%, 90%)",
@@ -137,10 +122,22 @@
 				"text-offset": [0, 1]
 			},
 			"paint": {
-				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 1 ],
+				"text-opacity": [ "interpolate", [ "linear" ], [ "zoom" ], 15, 0, 16, 0.5 ],
 				"text-color": "hsl(227, 89%, 90%)"
 			},
 			"minzoom": 15
+		},
+		{
+			"id": "toronto-contours",
+			"source": "toronto_contours",
+			"source-layer": "toronto_contours",
+			"type": "fill",
+			"paint": {
+				"fill-color": "hsl(233, 15%, 100%)",
+				"fill-opacity": ["interpolate", ["linear"], ["zoom"], 14, 1, 15, 0]
+			},
+			"minzoom": 14,
+			"maxzoom": 15
 		}
 	]
 }
